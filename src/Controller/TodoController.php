@@ -47,6 +47,39 @@ class TodoController extends AbstractController
         }
         return $this->redirectToRoute('app_todo');
     }
-    // Todo : Update la liste des todo
-    // Todo : Delete un todo
+
+    #[Route('/todo/update/{name}/{content}', name: 'todo_update')]
+    public function updateTodo(SessionInterface $session, $name, $content) {
+        if($session->has('todos')) {
+            $todos = $session->get('todos');
+            if (isset($todos[$name])) {
+                $todos[$name] = $content;
+                $session->set('todos', $todos);
+                $this->addFlash('success', "Le todo $name a été mis à jour avec succèes");
+            } else {
+                $this->addFlash('error', "Le todo $name n'existe pas");
+            }
+        } else {
+            $this->addFlash('error', "La liste des todos n'existe pas");
+        }
+        return $this->redirectToRoute('app_todo');
+    }
+
+    #[Route('/todo/delete/{name}', name: 'todo_delete')]
+    public function deleteTodo(SessionInterface $session, $name) {
+        if($session->has('todos')) {
+            $todos = $session->get('todos');
+            if (isset($todos[$name])) {
+                unset($todos[$name]);
+                $session->set('todos', $todos);
+                $this->addFlash('success', "Le todo $name a été supprimé avec succèes");
+            } else {
+                $this->addFlash('error', "Le todo $name n'existe pas");
+            }
+        } else {
+            $this->addFlash('error', "La liste des todos n'existe pas");
+        }
+        return $this->redirectToRoute('app_todo');
+    }
+
 }
