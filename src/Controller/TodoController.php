@@ -47,4 +47,6 @@ class TodoController extends AbstractController
         }
         return $this->redirectToRoute('app_todo');
     }
+    // Todo : Update la liste des todo
+    // Todo : Delete un todo
 }
