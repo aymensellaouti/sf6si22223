@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,8 +21,9 @@ class FirstController extends AbstractController
     }
 
     #[Route('/hello/{name}', name: 'hello')]
-    public function sayHello($name): Response
+    public function sayHello(Request $request, $name): Response
     {
+        dump($request);
         return $this->render('first/hello.html.twig', [
             'name' => $name,
         ]);
