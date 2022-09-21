@@ -28,4 +28,12 @@ class FirstController extends AbstractController
             'name' => $name,
         ]);
     }
+    #[Route('/notes/{nbre?5}', name: 'notes')]
+    public function notes(int $nbre) {
+        $notes = [];
+        for ($i=0; $i<$nbre; $i++) {
+            $notes[] = rand(0,20);
+        }
+        return $this->render('first/notes.html.twig', ['notes' => $notes]);
+    }
 }

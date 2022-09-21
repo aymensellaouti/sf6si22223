@@ -9,7 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CvController extends AbstractController
 {
-    #[Route('/cv/{name}/{firstname}/{age}/{section}', name: 'app_cv')]
+    #[Route(
+        '/cv/{name}/{firstname}/{age<[01]?\d{1,2}>}/{section?si2}',
+        name: 'app_cv',
+//        requirements: ['age' => '']
+    )]
     public function index($name, $firstname, $age, $section): Response
     {
         return $this->render('cv/index.html.twig', [
