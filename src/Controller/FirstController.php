@@ -36,4 +36,12 @@ class FirstController extends AbstractController
         }
         return $this->render('first/notes.html.twig', ['notes' => $notes]);
     }
+    #[Route('/template', name: 'template')]
+    public function template() {
+        return $this->render('first/fils.html.twig');
+    }
+    #[Route('/base', name: 'base')]
+    public function base() {
+        return $this->render('base.html.twig');
+    }
 }
