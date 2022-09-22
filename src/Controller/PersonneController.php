@@ -13,21 +13,17 @@ class PersonneController extends AbstractController
     public function __construct(private ManagerRegistry $doctrine)
     {}
 
-    #[Route('/personne', name: 'app_personne')]
-    public function index(): Response
+    #[Route('/personne/add/{name}/{age<\d{1,2}>}', name: 'app_personne')]
+    public function addPersonne($name, $age): Response
     {
         $manager = $this->doctrine->getManager();
         $personne = new Personne();
-        $personne->setName('aymen');
-        $personne->setAge(40);
-        $personne2 = new Personne();
-        $personne2->setName('aymen');
-        $personne2->setAge(40);
+        $personne->setName($name);
+        $personne->setAge($age);
         $manager->persist($personne);
-        $manager->persist($personne2);
         $manager->flush();
-        return $this->render('personne/index.html.twig', [
-            'controller_name' => 'PersonneController',
+        return $this->render('personne/show.html.twig', [
+            'personne' => $personne,
         ]);
     }
 }
