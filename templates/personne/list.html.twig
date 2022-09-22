@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des  personnes
+{% endblock %}
+
+{% block pageTitle %}
+   Liste des personnes
+{% endblock %}
+{% block body %}
+    <div class="row">
+    {% for personne in personnes %}
+        {{ include('personne/details-personne-fragment.html.twig', {personne: personne}) }}
+    {% endfor %}
+    </div>
+{% endblock %}
+

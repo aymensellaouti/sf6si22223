@@ -1,0 +1,29 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">
+            {% if personne.filePath %}
+                <img class="rounded-circle" width="50" height="50" src="{{ personne.filePath }}" alt=" {{ personne.name }}">
+            {% endif %}
+            {{ personne.id }} - {{ personne.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ personne.age }} ans </h6>
+        {% if personne.club %}
+            <div class="alert alert-dark">{{ personne.club.designation }}</div>
+        {% endif %}
+        {% if personne.profil %}
+            <div class="alert alert-warning">{{ personne.profil.email }}</div>
+        {% endif %}
+        {% if personne.cours | length %}
+            <div class="alert alert-info">
+                <ol class="list-group">
+                    {% for cour in personne.cours %}
+                        <li class="list-group-item">
+                            {{ cour.designation }}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endif %}
+        <a href="{{ path('delete_personne', {id: personne.id}) }}" class="card-link">Delete {{ personne.name }}</a>
+        <a href="{{ path('edit_personne', {id: personne.id}) }}" class="card-link">Update {{ personne.name }}</a>
+    </div>
+</div>
